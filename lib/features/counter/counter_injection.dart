@@ -6,6 +6,7 @@ import 'data/repositories/counter_repository_impl.dart';
 import 'domain/repositories/counter_repository.dart';
 import 'domain/usecases/decrement_counter.dart';
 import 'domain/usecases/increment_counter.dart';
+import 'domain/usecases/reset_counter.dart';
 
 Future<void> initCounterInjection() async {
   // 💾 Data Sources - 가장 하위 계층부터 등록
@@ -21,10 +22,12 @@ Future<void> initCounterInjection() async {
   // 🎯 Use Cases - Repository를 의존하므로 이후에 등록
   sl.registerLazySingleton(() => IncrementCounter(sl()));
   sl.registerLazySingleton(() => DecrementCounter(sl()));
+  sl.registerLazySingleton(() => ResetCounter(sl()));
 
   // 📦 Bloc - UseCase를 의존하므로 가장 마지막에 등록
   sl.registerFactory(() => CounterBloc(
         incrementCounter: sl(),
         decrementCounter: sl(),
+        resetCounter: sl(),
       ));
 }

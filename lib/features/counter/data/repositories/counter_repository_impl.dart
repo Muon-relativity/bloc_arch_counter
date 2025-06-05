@@ -16,4 +16,9 @@ class CounterRepositoryImpl implements CounterRepository {
   Future<Counter> increment(int currentCount) {
     return localDataSource.increment(currentCount);
   }
+
+  @override
+  Future<Counter> reset() {
+    return localDataSource.reset();
+  }
 }

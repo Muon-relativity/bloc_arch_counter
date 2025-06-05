@@ -20,26 +20,33 @@ class CounterPage extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 80.0), // 하단 여백 확보
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            FloatingActionButton(
-              onPressed: () {
-                context.read<CounterBloc>().add(IncrementCounterEvent());
-              },
-              child: Icon(Icons.add),
-            ),
-            SizedBox(height: 10),
-            FloatingActionButton(
-              onPressed: () {
-                context.read<CounterBloc>().add(DecrementCounterEvent());
-              },
-              child: Icon(Icons.remove),
-            ),
-          ],
-        ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            heroTag: 'increment',
+            onPressed: () {
+              context.read<CounterBloc>().add(IncrementCounterEvent());
+            },
+            child: Icon(Icons.add),
+          ),
+          SizedBox(height: 10),
+          FloatingActionButton(
+            heroTag: 'decrement',
+            onPressed: () {
+              context.read<CounterBloc>().add(DecrementCounterEvent());
+            },
+            child: Icon(Icons.remove),
+          ),
+          SizedBox(height: 10),
+          FloatingActionButton(
+            heroTag: 'reset',
+            onPressed: () {
+              context.read<CounterBloc>().add(ResetCounterEvent());
+            },
+            child: Icon(Icons.refresh),
+          ),
+        ],
       ),
     );
   }

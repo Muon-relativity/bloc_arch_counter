@@ -3,6 +3,7 @@ import '../../domain/entities/counter.dart';
 abstract class CounterLocalDataSource {
   Future<Counter> increment(int currentCount);
   Future<Counter> decrement(int currentCount);
+  Future<Counter> reset();
 }
 
 class CounterLocalDataSourceImpl implements CounterLocalDataSource {
@@ -15,5 +16,10 @@ class CounterLocalDataSourceImpl implements CounterLocalDataSource {
   @override
   Future<Counter> decrement(int currentCount) async {
     return Counter(value: currentCount - 1);
+  }
+
+  @override
+  Future<Counter> reset() async {
+    return Counter(value: 0);
   }
 }
